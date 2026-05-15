@@ -1,0 +1,106 @@
+{
+  "name": "fileguard",
+  "version": "0.1.0",
+  "description": "Production-grade secure file upload middleware for Node.js",
+  "type": "module",
+  "main": "./index.js",
+  "types": "./types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "types": "./types/index.d.ts"
+    },
+    "./express": {
+      "import": "./src/adapters/express.js",
+      "types": "./types/index.d.ts"
+    },
+    "./nextjs": {
+      "import": "./src/adapters/nextjs.js",
+      "types": "./types/index.d.ts"
+    },
+    "./fastify": {
+      "import": "./src/adapters/fastify.js",
+      "types": "./types/index.d.ts"
+    },
+    "./storage/local": {
+      "import": "./src/storage/local.js",
+      "types": "./types/index.d.ts"
+    },
+    "./storage/s3": {
+      "import": "./src/storage/s3.js",
+      "types": "./types/index.d.ts"
+    },
+    "./storage/cloudinary": {
+      "import": "./src/storage/cloudinary.js",
+      "types": "./types/index.d.ts"
+    },
+    "./react": {
+      "import": "./src/react/index.js",
+      "types": "./types/index.d.ts"
+    },
+    "./scanners/clamav": {
+      "import": "./src/scanners/clamav.js",
+      "types": "./types/index.d.ts"
+    },
+    "./scanners/virustotal": {
+      "import": "./src/scanners/virustotal.js",
+      "types": "./types/index.d.ts"
+    }
+  },
+  "files": [
+    "index.js",
+    "src/",
+    "types/"
+  ],
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "busboy": "^1.6.0",
+    "file-type": "^19.0.0",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.8.0",
+    "typescript": "^5.0.0",
+    "vitest": "^1.6.0"
+  },
+  "peerDependencies": {
+    "@aws-sdk/client-s3": "^3.0.0",
+    "clamscan": "^2.0.0",
+    "cloudinary": "^2.0.0",
+    "react": ">=18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@aws-sdk/client-s3": {
+      "optional": true
+    },
+    "cloudinary": {
+      "optional": true
+    },
+    "clamscan": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "file-upload",
+    "security",
+    "middleware",
+    "express",
+    "nextjs",
+    "fastify",
+    "clamav",
+    "virustotal",
+    "magic-bytes",
+    "zip-bomb",
+    "polyglot"
+  ],
+  "license": "MIT"
+}
