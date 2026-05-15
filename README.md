@@ -527,4 +527,4 @@ import { scanWithVirusTotal }              from 'fileguard/scanners/virustotal'
 
 ## License
 
-MIT © [Muhammad Saleem](https://github.com/msal95)
+MIT © [Muhammad Shahid](https://github.com/msal95)

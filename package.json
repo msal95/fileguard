@@ -1,7 +1,7 @@
 {
   "name": "fileguard",
   "version": "0.1.0",
-  "description": "Production-grade secure file upload middleware for Node.js",
+  "description": "Production-grade secure file upload middleware for Node.js — magic bytes, ZIP bomb & polyglot detection, virus scanning, multi-storage, and React UI components",
   "type": "module",
   "main": "./index.js",
   "types": "./types/index.d.ts",
@@ -52,9 +52,42 @@
     "src/",
     "types/"
   ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "test": "vitest run",
+    "test:watch": "vitest",
     "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "file-upload",
+    "security",
+    "middleware",
+    "express",
+    "nextjs",
+    "fastify",
+    "clamav",
+    "virustotal",
+    "magic-bytes",
+    "zip-bomb",
+    "polyglot",
+    "s3",
+    "cloudinary",
+    "react",
+    "typescript",
+    "multipart",
+    "upload-validation"
+  ],
+  "author": "Muhammad Shahid",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/msal95/fileguard.git"
+  },
+  "homepage": "https://github.com/msal95/fileguard#readme",
+  "bugs": {
+    "url": "https://github.com/msal95/fileguard/issues"
   },
   "dependencies": {
     "busboy": "^1.6.0",
@@ -85,22 +118,5 @@
     "react": {
       "optional": true
     }
-  },
-  "engines": {
-    "node": ">=18.0.0"
-  },
-  "keywords": [
-    "file-upload",
-    "security",
-    "middleware",
-    "express",
-    "nextjs",
-    "fastify",
-    "clamav",
-    "virustotal",
-    "magic-bytes",
-    "zip-bomb",
-    "polyglot"
-  ],
-  "license": "MIT"
+  }
 }
