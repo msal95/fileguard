@@ -1,5 +1,5 @@
 {
-  "name": "fileguard",
+  "name": "@msal95/fileguard",
   "version": "0.1.1",
   "description": "Production-grade secure file upload middleware for Node.js — magic bytes, ZIP bomb & polyglot detection, virus scanning, multi-storage, and React UI components",
   "type": "module",

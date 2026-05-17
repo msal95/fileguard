@@ -4,10 +4,10 @@ Production-grade secure file upload middleware for Node.js.
 
 Not just a file picker — real security: magic byte detection, ZIP bomb protection, polyglot file blocking, optional ClamAV + VirusTotal scanning, and unified adapters for Express, Next.js, and Fastify.
 
-[![npm version](https://img.shields.io/npm/v/fileguard.svg)](https://www.npmjs.com/package/fileguard)
-[![npm downloads](https://img.shields.io/npm/dm/fileguard.svg)](https://www.npmjs.com/package/fileguard)
+[![npm version](https://img.shields.io/npm/v/@msal95/fileguard.svg)](https://www.npmjs.com/package/@msal95/fileguard)
+[![npm downloads](https://img.shields.io/npm/dm/@msal95/fileguard.svg)](https://www.npmjs.com/package/@msal95/fileguard)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Node >=18](https://img.shields.io/node/v/fileguard.svg)](https://www.npmjs.com/package/fileguard)
+[![Node >=18](https://img.shields.io/node/v/@msal95/fileguard.svg)](https://www.npmjs.com/package/@msal95/fileguard)
 
 ---
 
@@ -31,10 +31,10 @@ Not just a file picker — real security: magic byte detection, ZIP bomb protect
 ## Installation
 
 ```bash
-npm install fileguard
-yarn add fileguard
-pnpm add fileguard
-bun add fileguard
+npm install @msal95/fileguard
+yarn add @msal95/fileguard
+pnpm add @msal95/fileguard
+bun add @msal95/fileguard
 ```
 
 Optional peer dependencies — install only what you need:
@@ -82,7 +82,7 @@ Every upload passes through this fixed sequence. No step can be skipped.
 ## Quick Start
 
 ```js
-import { createGuard } from 'fileguard'
+import { createGuard } from '@msal95/fileguard'
 
 const guard = createGuard({
   allowedExtensions: ['jpg', 'png', 'pdf'],
@@ -112,7 +112,7 @@ if (result.success) {
 
 ```js
 import express from 'express'
-import { createExpressMiddleware } from 'fileguard/express'
+import { createExpressMiddleware } from '@msal95/fileguard/express'
 
 const app = express()
 
@@ -140,7 +140,7 @@ The middleware always calls `next()`. Validation errors appear in `req.uploadRes
 
 ```js
 // app/api/upload/route.js
-import { createNextHandler } from 'fileguard/nextjs'
+import { createNextHandler } from '@msal95/fileguard/nextjs'
 
 export const POST = createNextHandler({
   allowedExtensions: ['jpg', 'png', 'pdf'],
@@ -160,7 +160,7 @@ Returns a `Response` with JSON. Status `200` on success, `422` on validation fai
 
 ```js
 import Fastify from 'fastify'
-import { createFastifyPlugin } from 'fileguard/fastify'
+import { createFastifyPlugin } from '@msal95/fileguard/fastify'
 
 const fastify = Fastify()
 
@@ -262,7 +262,7 @@ npm install react
 ```
 
 ```jsx
-import { DropZone, UploadButton, ProgressBar, FilePreview } from 'fileguard/react'
+import { DropZone, UploadButton, ProgressBar, FilePreview } from '@msal95/fileguard/react'
 
 function Uploader() {
   const [file, setFile] = useState(null)
@@ -324,7 +324,7 @@ Theme any component by setting these on a parent element:
 ## Rate Limiting
 
 ```js
-import { createGuard } from 'fileguard'
+import { createGuard } from '@msal95/fileguard'
 
 const guard = createGuard({
   storage: 'local',
@@ -362,8 +362,8 @@ Each log entry contains: `event`, `filename`, `size`, `storage`, `url` or `error
 Use the building blocks directly without a framework adapter:
 
 ```js
-import { validateFile } from 'fileguard'
-import { localStore } from 'fileguard/storage/local'
+import { validateFile } from '@msal95/fileguard'
+import { localStore } from '@msal95/fileguard/storage/local'
 
 const validation = await validateFile(
   { buffer, filename: 'photo.png', mimeType: 'image/png', size: buffer.length },
@@ -453,8 +453,8 @@ Every function returns a plain object — nothing is ever thrown to the caller.
 Full type definitions are included — no `@types/fileguard` needed.
 
 ```ts
-import { createGuard } from 'fileguard'
-import type { FileguardConfig, Result } from 'fileguard'
+import { createGuard } from '@msal95/fileguard'
+import type { FileguardConfig, Result } from '@msal95/fileguard'
 
 const guard = createGuard({ storage: 'local', localPath: './uploads' })
 
@@ -477,16 +477,16 @@ if (result.success) {
 ## Sub-path Exports
 
 ```js
-import { createGuard, validateFile }       from 'fileguard'
-import { createExpressMiddleware }          from 'fileguard/express'
-import { createNextHandler }               from 'fileguard/nextjs'
-import { createFastifyPlugin }             from 'fileguard/fastify'
-import { localStore }                      from 'fileguard/storage/local'
-import { s3Store }                         from 'fileguard/storage/s3'
-import { cloudinaryStore }                 from 'fileguard/storage/cloudinary'
-import { DropZone, UploadButton }          from 'fileguard/react'
-import { scanWithClamAV }                  from 'fileguard/scanners/clamav'
-import { scanWithVirusTotal }              from 'fileguard/scanners/virustotal'
+import { createGuard, validateFile }       from '@msal95/fileguard'
+import { createExpressMiddleware }          from '@msal95/fileguard/express'
+import { createNextHandler }               from '@msal95/fileguard/nextjs'
+import { createFastifyPlugin }             from '@msal95/fileguard/fastify'
+import { localStore }                      from '@msal95/fileguard/storage/local'
+import { s3Store }                         from '@msal95/fileguard/storage/s3'
+import { cloudinaryStore }                 from '@msal95/fileguard/storage/cloudinary'
+import { DropZone, UploadButton }          from '@msal95/fileguard/react'
+import { scanWithClamAV }                  from '@msal95/fileguard/scanners/clamav'
+import { scanWithVirusTotal }              from '@msal95/fileguard/scanners/virustotal'
 ```
 
 ---
