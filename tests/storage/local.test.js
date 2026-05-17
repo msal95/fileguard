@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach } from 'vitest'
-import { rm, readFile, access } from 'fs/promises'
+import { rm, readFile, access, writeFile } from 'fs/promises'
 import os from 'os'
 import path from 'path'
 import { localStore } from '../../src/storage/local.js'
@@ -68,10 +68,16 @@ describe('localStore', () => {
   })
 
   it('returns STORAGE_ERROR when the path is not writable', async () => {
-    // /proc/fileguard-test is unwritable on macOS/Linux
-    const result = await localStore(makeFile(), { localPath: '/proc/fileguard-test-unreachable' })
-    expect(result.success).toBe(false)
-    expect(result.error).toBe('STORAGE_ERROR')
+    // Create a FILE at the target path — mkdir will fail instantly (cross-platform)
+    const blockedPath = path.join(os.tmpdir(), 'fileguard-blocked-file')
+    await writeFile(blockedPath, 'block')
+    try {
+      const result = await localStore(makeFile(), { localPath: blockedPath })
+      expect(result.success).toBe(false)
+      expect(result.error).toBe('STORAGE_ERROR')
+    } finally {
+      await rm(blockedPath, { force: true })
+    }
   })
 
   it('uses ./uploads as the default localPath', async () => {

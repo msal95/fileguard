@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach } from 'vitest'
-import { readFile, rm } from 'fs/promises'
+import { readFile, rm, writeFile } from 'fs/promises'
 import path from 'path'
 import os from 'os'
 import { createGuard } from '../../src/index.js'
@@ -100,21 +100,27 @@ describe('createGuard', () => {
   })
 
   it('returns STORAGE_ERROR when the storage adapter throws unexpectedly', async () => {
-    // Use a nonsensical storage path to force a write error
-    const guard = createGuard({
-      storage: 'local',
-      localPath: '/proc/impossible-path-fileguard',
-      allowedExtensions: ['png'],
-      allowedMimeTypes: ['image/png'],
-    })
-    const result = await guard.process({
-      buffer: PNG,
-      filename: 'photo.png',
-      mimeType: 'image/png',
-      size: PNG.length,
-    })
-    expect(result.success).toBe(false)
-    expect(result.error).toBe('STORAGE_ERROR')
+    // Create a FILE at the target path — mkdir will fail instantly (cross-platform)
+    const blockedPath = path.join(os.tmpdir(), 'fileguard-guard-blocked')
+    await writeFile(blockedPath, 'block')
+    try {
+      const guard = createGuard({
+        storage: 'local',
+        localPath: blockedPath,
+        allowedExtensions: ['png'],
+        allowedMimeTypes: ['image/png'],
+      })
+      const result = await guard.process({
+        buffer: PNG,
+        filename: 'photo.png',
+        mimeType: 'image/png',
+        size: PNG.length,
+      })
+      expect(result.success).toBe(false)
+      expect(result.error).toBe('STORAGE_ERROR')
+    } finally {
+      await rm(blockedPath, { force: true })
+    }
   })
 
   it('does not store the file when validation fails', async () => {
