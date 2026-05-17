@@ -15,7 +15,7 @@ import { failResult } from '../errors/UploadError.js'
  *     res.json(req.uploadResult)
  *   })
  *
- * @param {object} [config] - fileguard config (storage, allowedExtensions, etc.)
+ * @param {object} [config] - uploadshield config (storage, allowedExtensions, etc.)
  * @returns {Function} Express middleware (req, res, next) => void
  */
 export function createExpressMiddleware(config = {}) {

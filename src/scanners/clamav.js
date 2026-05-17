@@ -19,7 +19,7 @@ export async function scanWithClamAV(buffer, clamavOptions = {}) {
     NodeClam = mod.default ?? mod
   } catch {
     console.warn(
-      '[fileguard] ClamAV scan skipped: clamscan package is not installed. ' +
+      '[uploadshield] ClamAV scan skipped: clamscan package is not installed. ' +
         'Install it with: npm install clamscan'
     )
     return { success: true, skipped: true }
@@ -29,7 +29,7 @@ export async function scanWithClamAV(buffer, clamavOptions = {}) {
   try {
     clam = await new NodeClam().init(clamavOptions)
   } catch (err) {
-    console.warn(`[fileguard] ClamAV initialisation failed: ${err.message}. Skipping scan.`)
+    console.warn(`[uploadshield] ClamAV initialisation failed: ${err.message}. Skipping scan.`)
     return { success: true, skipped: true }
   }
 
@@ -44,7 +44,7 @@ export async function scanWithClamAV(buffer, clamavOptions = {}) {
 
     return { success: true }
   } catch (err) {
-    console.warn(`[fileguard] ClamAV scan error: ${err.message}. Skipping scan.`)
+    console.warn(`[uploadshield] ClamAV scan error: ${err.message}. Skipping scan.`)
     return { success: true, skipped: true }
   }
 }

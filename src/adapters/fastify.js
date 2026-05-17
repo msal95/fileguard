@@ -7,7 +7,7 @@ import { failResult } from '../errors/UploadError.js'
  * Parse a raw Node.js http.IncomingMessage as a multipart upload using busboy.
  * @param {import('http').IncomingMessage} rawRequest
  * @param {object} config
- * @returns {Promise<object>} fileguard result object
+ * @returns {Promise<object>} uploadshield result object
  */
 async function processMultipart(rawRequest, config) {
   return new Promise((resolve, reject) => {
@@ -78,7 +78,7 @@ async function processMultipart(rawRequest, config) {
  *     reply.send(req.uploadResult)
  *   })
  *
- * @param {object} [config] - fileguard config
+ * @param {object} [config] - uploadshield config
  * @returns {Function} Fastify plugin async (fastify, opts) => void
  */
 export function createFastifyPlugin(config = {}) {

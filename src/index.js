@@ -5,7 +5,7 @@ import { createRateLimiter } from './core/rateLimiter.js'
 import { createLogger } from './audit/logger.js'
 
 /**
- * Create a configured fileguard instance.
+ * Create a configured uploadshield instance.
  * @param {object} [config] - Optional configuration overrides
  * @returns {{ process: Function }}
  */
@@ -62,4 +62,4 @@ export function createGuard(config = {}) {
   }
 }
 
-export { createGuard as fileguard }
+export { createGuard as uploadshield }

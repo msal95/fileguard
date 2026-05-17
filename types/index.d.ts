@@ -1,4 +1,4 @@
-// fileguard — TypeScript definitions
+// uploadshield — TypeScript definitions
 // Works with Node.js >=18, React >=18, Express, Next.js App Router, Fastify
 
 /// <reference types="node" />
@@ -173,7 +173,7 @@ export interface Guard {
 }
 
 export declare function createGuard(config?: FileguardConfig): Guard
-export { createGuard as fileguard }
+export { createGuard as uploadshield }
 
 // ── Core validation ───────────────────────────────────────────────────────────
 

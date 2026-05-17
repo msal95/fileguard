@@ -6,10 +6,10 @@ import { failResult } from '../errors/UploadError.js'
  * Create a Next.js App Router route handler for file uploads.
  *
  * Usage in app/api/upload/route.js:
- *   import { createNextHandler } from 'fileguard/nextjs'
+ *   import { createNextHandler } from 'uploadshield/nextjs'
  *   export const POST = createNextHandler({ storage: 'local', localPath: './uploads' })
  *
- * @param {object} [config] - fileguard config
+ * @param {object} [config] - uploadshield config
  * @returns {Function} async (request: Request) => Response
  */
 export function createNextHandler(config = {}) {

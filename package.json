@@ -1,5 +1,5 @@
 {
-  "name": "@msal95/fileguard",
+  "name": "uploadshield",
   "version": "0.1.1",
   "description": "Production-grade secure file upload middleware for Node.js — magic bytes, ZIP bomb & polyglot detection, virus scanning, multi-storage, and React UI components",
   "type": "module",
@@ -61,6 +61,7 @@
     "typecheck": "tsc --noEmit"
   },
   "keywords": [
+    "uploadshield",
     "file-upload",
     "security",
     "middleware",

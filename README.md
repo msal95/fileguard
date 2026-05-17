@@ -1,13 +1,13 @@
-# fileguard
+# uploadshield
 
 Production-grade secure file upload middleware for Node.js.
 
 Not just a file picker — real security: magic byte detection, ZIP bomb protection, polyglot file blocking, optional ClamAV + VirusTotal scanning, and unified adapters for Express, Next.js, and Fastify.
 
-[![npm version](https://img.shields.io/npm/v/@msal95/fileguard.svg)](https://www.npmjs.com/package/@msal95/fileguard)
-[![npm downloads](https://img.shields.io/npm/dm/@msal95/fileguard.svg)](https://www.npmjs.com/package/@msal95/fileguard)
+[![npm version](https://img.shields.io/npm/v/uploadshield.svg)](https://www.npmjs.com/package/uploadshield)
+[![npm downloads](https://img.shields.io/npm/dm/uploadshield.svg)](https://www.npmjs.com/package/uploadshield)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Node >=18](https://img.shields.io/node/v/@msal95/fileguard.svg)](https://www.npmjs.com/package/@msal95/fileguard)
+[![Node >=18](https://img.shields.io/node/v/uploadshield.svg)](https://www.npmjs.com/package/uploadshield)
 
 ---
 
@@ -24,17 +24,17 @@ Not just a file picker — real security: magic byte detection, ZIP bomb protect
 - ⚡ **Framework adapters** — Express middleware, Next.js App Router handler, Fastify plugin
 - ⚛️ **React UI components** — DropZone, UploadButton, ProgressBar, FilePreview with CSS variable theming
 - 📋 **Audit logging** — append-only JSON log of every upload attempt
-- 🟦 **TypeScript** — full type definitions included, no `@types/fileguard` needed
+- 🟦 **TypeScript** — full type definitions included, no `@types/uploadshield` needed
 
 ---
 
 ## Installation
 
 ```bash
-npm install @msal95/fileguard
-yarn add @msal95/fileguard
-pnpm add @msal95/fileguard
-bun add @msal95/fileguard
+npm install uploadshield
+yarn add uploadshield
+pnpm add uploadshield
+bun add uploadshield
 ```
 
 Optional peer dependencies — install only what you need:
@@ -82,7 +82,7 @@ Every upload passes through this fixed sequence. No step can be skipped.
 ## Quick Start
 
 ```js
-import { createGuard } from '@msal95/fileguard'
+import { createGuard } from 'uploadshield'
 
 const guard = createGuard({
   allowedExtensions: ['jpg', 'png', 'pdf'],
@@ -112,7 +112,7 @@ if (result.success) {
 
 ```js
 import express from 'express'
-import { createExpressMiddleware } from '@msal95/fileguard/express'
+import { createExpressMiddleware } from 'uploadshield/express'
 
 const app = express()
 
@@ -140,7 +140,7 @@ The middleware always calls `next()`. Validation errors appear in `req.uploadRes
 
 ```js
 // app/api/upload/route.js
-import { createNextHandler } from '@msal95/fileguard/nextjs'
+import { createNextHandler } from 'uploadshield/nextjs'
 
 export const POST = createNextHandler({
   allowedExtensions: ['jpg', 'png', 'pdf'],
@@ -160,7 +160,7 @@ Returns a `Response` with JSON. Status `200` on success, `422` on validation fai
 
 ```js
 import Fastify from 'fastify'
-import { createFastifyPlugin } from '@msal95/fileguard/fastify'
+import { createFastifyPlugin } from 'uploadshield/fastify'
 
 const fastify = Fastify()
 
@@ -262,7 +262,7 @@ npm install react
 ```
 
 ```jsx
-import { DropZone, UploadButton, ProgressBar, FilePreview } from '@msal95/fileguard/react'
+import { DropZone, UploadButton, ProgressBar, FilePreview } from 'uploadshield/react'
 
 function Uploader() {
   const [file, setFile] = useState(null)
@@ -324,7 +324,7 @@ Theme any component by setting these on a parent element:
 ## Rate Limiting
 
 ```js
-import { createGuard } from '@msal95/fileguard'
+import { createGuard } from 'uploadshield'
 
 const guard = createGuard({
   storage: 'local',
@@ -362,8 +362,8 @@ Each log entry contains: `event`, `filename`, `size`, `storage`, `url` or `error
 Use the building blocks directly without a framework adapter:
 
 ```js
-import { validateFile } from '@msal95/fileguard'
-import { localStore } from '@msal95/fileguard/storage/local'
+import { validateFile } from 'uploadshield'
+import { localStore } from 'uploadshield/storage/local'
 
 const validation = await validateFile(
   { buffer, filename: 'photo.png', mimeType: 'image/png', size: buffer.length },
@@ -450,11 +450,11 @@ Every function returns a plain object — nothing is ever thrown to the caller.
 
 ## TypeScript
 
-Full type definitions are included — no `@types/fileguard` needed.
+Full type definitions are included — no `@types/uploadshield` needed.
 
 ```ts
-import { createGuard } from '@msal95/fileguard'
-import type { FileguardConfig, Result } from '@msal95/fileguard'
+import { createGuard } from 'uploadshield'
+import type { FileguardConfig, Result } from 'uploadshield'
 
 const guard = createGuard({ storage: 'local', localPath: './uploads' })
 
@@ -477,16 +477,16 @@ if (result.success) {
 ## Sub-path Exports
 
 ```js
-import { createGuard, validateFile }       from '@msal95/fileguard'
-import { createExpressMiddleware }          from '@msal95/fileguard/express'
-import { createNextHandler }               from '@msal95/fileguard/nextjs'
-import { createFastifyPlugin }             from '@msal95/fileguard/fastify'
-import { localStore }                      from '@msal95/fileguard/storage/local'
-import { s3Store }                         from '@msal95/fileguard/storage/s3'
-import { cloudinaryStore }                 from '@msal95/fileguard/storage/cloudinary'
-import { DropZone, UploadButton }          from '@msal95/fileguard/react'
-import { scanWithClamAV }                  from '@msal95/fileguard/scanners/clamav'
-import { scanWithVirusTotal }              from '@msal95/fileguard/scanners/virustotal'
+import { createGuard, validateFile }       from 'uploadshield'
+import { createExpressMiddleware }          from 'uploadshield/express'
+import { createNextHandler }               from 'uploadshield/nextjs'
+import { createFastifyPlugin }             from 'uploadshield/fastify'
+import { localStore }                      from 'uploadshield/storage/local'
+import { s3Store }                         from 'uploadshield/storage/s3'
+import { cloudinaryStore }                 from 'uploadshield/storage/cloudinary'
+import { DropZone, UploadButton }          from 'uploadshield/react'
+import { scanWithClamAV }                  from 'uploadshield/scanners/clamav'
+import { scanWithVirusTotal }              from 'uploadshield/scanners/virustotal'
 ```
 
 ---

@@ -20,7 +20,7 @@ export async function scanWithVirusTotal(buffer, config = {}) {
   const { apiKey, pollIntervalMs = 5_000, maxPolls = 3 } = config
 
   if (!apiKey) {
-    console.warn('[fileguard] VirusTotal scan skipped: no apiKey configured.')
+    console.warn('[uploadshield] VirusTotal scan skipped: no apiKey configured.')
     return { success: true, skipped: true }
   }
 
@@ -40,14 +40,14 @@ export async function scanWithVirusTotal(buffer, config = {}) {
 
     if (!uploadRes.ok) {
       const text = await uploadRes.text().catch(() => uploadRes.status)
-      console.warn(`[fileguard] VirusTotal upload failed (${uploadRes.status}): ${text}. Skipping scan.`)
+      console.warn(`[uploadshield] VirusTotal upload failed (${uploadRes.status}): ${text}. Skipping scan.`)
       return { success: true, skipped: true }
     }
 
     const { data } = await uploadRes.json()
     analysisId = data.id
   } catch (err) {
-    console.warn(`[fileguard] VirusTotal upload error: ${err.message}. Skipping scan.`)
+    console.warn(`[uploadshield] VirusTotal upload error: ${err.message}. Skipping scan.`)
     return { success: true, skipped: true }
   }
 
@@ -72,7 +72,7 @@ export async function scanWithVirusTotal(buffer, config = {}) {
         }
       }
     } catch (err) {
-      console.warn(`[fileguard] VirusTotal poll error: ${err.message}. Skipping scan.`)
+      console.warn(`[uploadshield] VirusTotal poll error: ${err.message}. Skipping scan.`)
       return { success: true, skipped: true }
     }
 
@@ -80,6 +80,6 @@ export async function scanWithVirusTotal(buffer, config = {}) {
     if (i < maxPolls - 1) await sleep(pollIntervalMs)
   }
 
-  console.warn('[fileguard] VirusTotal analysis did not complete in time. Skipping scan.')
+  console.warn('[uploadshield] VirusTotal analysis did not complete in time. Skipping scan.')
   return { success: true, skipped: true }
 }
